@@ -13,8 +13,50 @@ import java.util.List;
  *
  */
 
+
 public class Bot {
     // TODO: implement your bot logic!
+    public void joke(String channelId){
+        {
+            ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
+
+            if (listMessagesResponse.isOk()) {
+                List<Message> messages = listMessagesResponse.getMessages();
+                Message  m= messages.get(messages.size()-1);
+                String input = m.getText();
+
+                StringBuilder input1 = new StringBuilder();
+
+                // append a string into StringBuilder input1
+                input1.append(input);
+
+                // reverse StringBuilder input1
+                input1 = input1.reverse();
+                String[] x= input1.toString().split(" ");
+
+                for(String s:x){
+                    sendMessageToBotsChannel(s+"ay");
+                    //sendMessageToBotsChannel();
+
+
+                }
+
+
+
+
+
+                //System.out.println(m.getText());
+                System.out.println("\nMessages: ");
+
+                sendMessageToBotsChannel("I'm the Spam Bot!!,\ni am gonna be king of the pirates");
+
+            } else {
+                System.err.print("Error lfisting messages: " + listMessagesResponse.getError());
+            }
+        }
+
+    }
+
 
     public Bot() {
 
